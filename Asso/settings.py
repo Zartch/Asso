@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social.apps.SocialConfig',
+    'social',
+    'cannavis',
+    'cultiu',
+    'espai'
 ]
 
 MIDDLEWARE = [
@@ -69,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'asso.wsgi.application'
+WSGI_APPLICATION = 'Asso.wsgi.application'
 
 
 # Database

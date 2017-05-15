@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from espai.models import Ubicacio, Plantacio
 
@@ -38,7 +39,7 @@ class Planta(models.Model):
     data_recollida = models.DateField(null=True)
     data_final = models.DateField(null=True)
     pes = models.FloatField(null=True)
-    banc = models.CharField()
+    banc = models.CharField(max_length=25   )
 
     def __str__(self):
         return self.varietat
@@ -54,14 +55,14 @@ class Lots(models.Model):
                      ('pol','pollen'),
                      ('ros','rosim'))
 
-    plantacio = models.ForeignKey(Plantacio, null=True)
-    lot_referencia = models.ForeignKey('Lots', null=True) # Primer son cogollos, despres de tratarse, poden ser un altre tipologia amb el lot inicial referenciat
+    plantacio = models.ForeignKey(Plantacio, null=True, blank=True)
+    lot_referencia = models.ForeignKey('Lots', null=True, blank=True) # Primer son cogollos, despres de tratarse, poden ser un altre tipologia amb el lot inicial referenciat
     tipologia = models.CharField(choices=TIPOLOGIA_LOT, max_length=3)
-    plantes = models.ManyToManyField(Planta)
+    plantes = models.ManyToManyField(Planta, blank=True)
     grams_inicials = models.FloatField()
-    grams_restants = models.FloatField()
-    data_creacio = models.DateField()
-    data_modificacio = models.DateField()
+    grams_restants = models.FloatField(null=True)
+    data_creacio = models.DateField(auto_now_add=True)
+    data_modificacio = models.DateField(null=True)
     ubicacio = models.ForeignKey(Ubicacio)
 
     try:
@@ -69,20 +70,5 @@ class Lots(models.Model):
     except Exception as e:
         print(e)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def __str__(self):
+        return str(self.pk)+"-" + str(self.tipologia)+"-" + str(self.grams_restants)

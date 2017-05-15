@@ -13,21 +13,21 @@ class Comoponent(models.Model):
 class QuantitatsComponets(models.Model):
 
     component = models.ForeignKey(Comoponent)
-    producte = models.ForeignKey(Producte)
+    producte = models.ForeignKey('Producte')
     quantitat = models.FloatField()
     unitat = models.ForeignKey(UnitatMesura)
 
     def __str__(self):
 
-        return  self.producte + self.component + self.quantitat
+        return  str(self.producte) + str(self.component) + str(self.quantitat)
 
 
 class Producte(models.Model):
 
-    TIPUS_PRODUCTES = (('o','organic'))
+    TIPUS_PRODUCTES = (('n','normal'),('o','organic'))
 
 
-    tipologia = models.CharField(max_length=1, choices=TIPUS_PRODUCTES, null=True)
+    tipologia = models.CharField(max_length=1, choices=TIPUS_PRODUCTES, default='n')
     components = models.ManyToManyField(Comoponent, through=QuantitatsComponets, blank=True)
     nom = models.CharField(max_length=50)
     descripcio = models.TextField()
@@ -41,23 +41,22 @@ class Producte(models.Model):
 class RegComponets(models.Model):
 
     producte = models.ForeignKey(Producte)
-    reg = models.ForeignKey(Tractament)
+    reg = models.ForeignKey('Tractament')
     quantitat = models.FloatField()
     unitat = models.ForeignKey(UnitatMesura)
 
     def __str__(self):
-        return  self.producte + self.reg + str(self.litres)
+        return  str(self.producte) + str(self.reg) + str(self.quantitat)
 
 
 class Tractament(models.Model):
-
-
     data = models.DateField()
     productes = models.ManyToManyField(Producte, through=RegComponets)
     plantacio = models.ForeignKey(Plantacio)
     descripcio = models.TextField(blank=True, default='')
 
     def __str__(self):
+        return str(self.data) + self.descripcio
 
 
 

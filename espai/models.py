@@ -1,5 +1,5 @@
 from django.db import models
-from cannavis.models import UnitatMesura
+# from social.models import UnitatMesura
 
 
 #Las salas de cultiu
@@ -18,7 +18,7 @@ class Focus(models.Model):
 
 
     potencia = models.FloatField()
-    unitats = models.ForeignKey(UnitatMesura)
+    # unitats = models.ForeignKey(UnitatMesura)
     tipologia = models.CharField(max_length=1,choices=TIPUS_FOCUS)
     descripcion = models.TextField(null=True)
 
