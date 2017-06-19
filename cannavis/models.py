@@ -64,6 +64,7 @@ class Lots(models.Model):
     data_creacio = models.DateField(auto_now_add=True)
     data_modificacio = models.DateField(null=True)
     ubicacio = models.ForeignKey(Ubicacio)
+    actiu = models.BooleanField(default=True)
 
     try:
         pass

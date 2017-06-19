@@ -1,0 +1,69 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=2">
+    <title>{% trans 'Nou Consum' %}</title>
+
+    <script src="{% static 'js/jquery-2.1.4.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/select2.min.js' %}"></script>
+    <script src="{% static 'js/notifIt.js' %}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/select2.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/notifIt.css' %}">
+
+
+</head>
+<body>
+
+<p>Zona de Consúm</p>
+
+<style>
+{#    #consum{#}
+{#        margin: 0 auto;#}
+{#    }#}
+</style>
+<div id="consum" class="form-control" style="max-width: 180px;height: 100%">
+    <form method="POST">{% csrf_token %}
+
+
+        Soci:
+        <select name="soci" class="form-control" required>
+            <option></option>
+            {% for soci in llista_socis %}
+                <option value="{{ soci.id }}">{{ soci.id }}-{{ soci.nom }}</option>
+            {% endfor %}
+        </select>
+
+
+        Lot:
+        <select name="lot" class="form-control" required>
+            <option></option>
+            {% for lot in llista_productes %}
+                <option value="{{ lot.id }}">{{ lot.id }}({{ lot.grams_restants }})</option>
+            {% endfor %}
+        </select>
+
+        <input type="number" step=".01" name="grams" class="form-control" placeholder="{% trans 'quantitat' %}"
+               required>
+        <input type="number" step=".01" name="aportacio" class="form-control" placeholder="{% trans 'aportacio' %}"
+               required>
+        <br>
+        <input onclick="confirm('Segur?')" type="submit" value="Guardar">
+    </form>
+
+</div>
+<script>
+    {% if messages %}
+        {% for message in messages %}
+            CallNotification('{{ message }}', '{{ message.extra_tags }}');
+        {% endfor %}
+    {% endif %}
+</script>
+
+</body>
+</html>

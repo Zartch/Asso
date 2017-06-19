@@ -39,8 +39,8 @@ class previsiocultiu(models.Model):
 class consum(models.Model):
     soci = models.ForeignKey(Soci)
     data = models.DateField(auto_now_add=True)
-    quantitat = models.IntegerField()
-    aportacio = models.IntegerField()
+    quantitat = models.FloatField()
+    aportacio = models.FloatField()
     lot = models.ForeignKey(Lots)
     ubicacio = models.ForeignKey(Ubicacio)
 
