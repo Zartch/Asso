@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Zeed Security secure login</title>
+      <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{#      <link rel="icon" href="{% static 'imgs/icons/favicon.png' %}?ver={{ ADA_VERSION }}" type="image/x-icon">#}
+{##}
+{#    <script src="{% static 'js/jquery-2.2.4.min.js' %}"></script>#}
+  </head>
+
+  <body>
+    <div class="container center" style="height: 100%;width: 100%;">
+        <div class="row login-page form">
+            <div class="col-md-12">
+{#                <img class="col-md-12 logo" src="{% static 'imgs/logo_hp_zs.png' %}"  >#}
+                    AKI FALTA EL LOGO
+            </div>
+            <div class="col-md-12">
+                <form class="login-form" method="POST">{% csrf_token %}
+                    <input type="text" placeholder="nombre de usuario" name="username"/>
+                    <input type="password" AUTOCOMPLETE='OFF' placeholder="clave de acceso" name="password"/>
+                    <button id="loginbtn" class="button_login">login</button>
+                </form>
+{#                <div class="well">#}
+{#                     En estos momentos estamos de mantenimiento, Disculpe las molestias.#}
+{#                </div>#}
+            </div>
+        </div>
+    </div>
+    {% if errors != False %}
+        <script type="text/javascript">
+            $('#loginbtn').toggleClass("error");
+        </script>
+
+    {% endif %}
+
+  </body>
+</html>

@@ -1,25 +1,7 @@
+{% extends 'base.html' %}
 {% load i18n %}
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=2">
-    <title>{% trans 'Nou Consum' %}</title>
-
-    <script src="{% static 'js/jquery-2.1.4.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/select2.min.js' %}"></script>
-    <script src="{% static 'js/notifIt.js' %}"></script>
-
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/select2.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/notifIt.css' %}">
-
-
-</head>
-<body>
-
+{% block title %}{% trans 'Nou Consum' %}{% endblock %}
+{% block content %}
 <p>Zona de Consúm</p>
 
 <style>
@@ -57,13 +39,4 @@
     </form>
 
 </div>
-<script>
-    {% if messages %}
-        {% for message in messages %}
-            CallNotification('{{ message }}', '{{ message.extra_tags }}');
-        {% endfor %}
-    {% endif %}
-</script>
-
-</body>
-</html>
+{% endblock %}

@@ -17,8 +17,15 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
+from login.views import alogin, menu
+from django.contrib.auth.views import logout
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^consum/',include('social.urls') ),
+    url(r'^logout/$', logout, {'next_page': '/login'}, name='logout'),
+    url(r'^menu/', menu ,name='menu'),
+    url(r'^', alogin ,name='login'),
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
